@@ -8,7 +8,7 @@ using namespace std;
 string Movie::getTitle() {
 	return this->title;
 }
-string Movie::getGenre() {
+vector<string>& Movie::getGenre() {
 	return this->genre;
 }
 void Movie::setGenre(string genre) {
@@ -20,7 +20,7 @@ int Movie::getYear() {
 int Movie::getLength() {
 	return this->length;
 }
-int Movie::getRating() {
+float Movie::getRating() {
 	return this->rating;
 }
 void Movie::swap(int* a, int* b) { // This code is from the sorting lecture slides
