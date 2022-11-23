@@ -11,9 +11,6 @@ string Movie::getTitle() {
 vector<string>& Movie::getGenre() {
 	return this->genre;
 }
-void Movie::setGenre(string genre) {
-	this->genre = genre;
-}
 int Movie::getYear() {
 	return this->year;
 }
