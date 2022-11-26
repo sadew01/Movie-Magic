@@ -6,12 +6,14 @@
 using namespace std;
 
 
-Movie::Movie(string title, vector<string>& genre, int year, int length, float rating) {
+Movie::Movie(string title, vector<string>& genre, vector<string>& director, int year, int length, float rating, int numRatings) {
     this->title = title;
     this->genre = genre;
+    this->director = director;
     this->year = year;
     this->length = length;
     this->rating = rating;
+    this->numRatings = numRatings;
 }
 
 string Movie::getTitle() {
@@ -19,6 +21,9 @@ string Movie::getTitle() {
 }
 vector<string>& Movie::getGenre() {
     return this->genre;
+}
+vector<string>& Movie::getDirector() {
+    return this->director;
 }
 int Movie::getYear() {
     return this->year;
@@ -28,6 +33,9 @@ int Movie::getLength() {
 }
 float Movie::getRating() {
     return this->rating;
+}
+int Movie::getNumRatings() {
+    return this->numRatings;
 }
 void Movie::swap(int* a, int* b) { // This code is from the sorting lecture slides
     int t = *a;
