@@ -62,20 +62,18 @@ int main() {
 	cout << "* Welcome to Movie Magic! *" << endl;
 	cout << "Our goal is to make finding movies suited to your tastes easier." << endl;
 	cout << endl;
-	cout << "Please enter the numbers corresponding to your favorite genres or type in your favorite director." << endl;
-	cout << "(ex. \"1 2 4 6\" or \"Ryan Coogler\")" << endl;
-	cout << "1. Comedy" << endl;
-	cout << "2. Sci-Fi" << endl;
-	cout << "3. Horror" << endl;
-	cout << "4. Romance" << endl;
-	cout << "5. Action" << endl;
-	cout << "6. Thriller" << endl;
-	cout << "7. Drama" << endl;
-	cout << "8. Mystery" << endl;
-	cout << "9. Crime" << endl;
-	cout << "10. Animation" << endl;
-	cout << "11. Adventure" << endl;
-	cout << "12. Fantasy" << endl;
+	cout << "Please enter up to three numbers corresponding to your favorite genres or type in your favorite director." << endl;
+	cout << "(ex. \"1 2 4\" or \"Ryan Coogler\")" << endl;
+	cout << endl;
+	cout << "1. Action         9.  Family        17. Romance" << endl;
+	cout << "2. Adventure      10. Fantasy       18. Sci-Fi" << endl;
+	cout << "3. Animation      11. Film Noir     19. Short Film" << endl;
+	cout << "4. Biography      12. History       20. Sport" << endl;
+	cout << "5. Comedy         13. Horror        21. Superhero" << endl;
+	cout << "6. Crime          14. Music         22. Thriller" << endl;
+	cout << "7. Documentary    15. Musical       23. War" << endl;
+	cout << "8. Drama          16. Mystery       24. Western" << endl;
 	cout << "Type 0 to exit." << endl;
+	
 	return 0;
 }
