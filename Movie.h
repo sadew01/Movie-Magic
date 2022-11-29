@@ -3,9 +3,10 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <array>
 using namespace std;
-class Movie {
 
+class Movie {
 private:
     string title = "";
     vector<string> genre = {};
