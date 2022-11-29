@@ -240,33 +240,44 @@ int main() {
                 // radix sort
 
                 // quick sort
+		break;
             }
             else if (stoi(option) == 2) { // length from shortest
                 // radix sort
 
                 // quick sort
+		    
+		break;
             }
             else if (stoi(option) == 3) { // rating from highest
                 // radix sort
 
                 // quick sort
+		break;
             }
             else if (stoi(option) == 4) { // rating from lowest
                 // radix sort
 
                 // quick sort
+		    
+		break;
             }
             else if (stoi(option) == 5) { // number of ratings from highest
                 // radix sort
 
                 // quick sort
+		break;
             }
             else if (stoi(option) == 6) { // number of ratings from lowest
                 // radix sort
 
                 // quick sort
+		break;
             }
         }
+	else {
+	    cout << "Please enter a valid option." << endl;
+	}
     }
     cout << endl;
     
