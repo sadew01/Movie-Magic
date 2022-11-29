@@ -7,12 +7,12 @@
 #include "Movie.h"
 using namespace std;
 
-void ReadInMovies (vector<Movie> &movies) {
+void ReadInMovies(vector<Movie>& movies) {
     ifstream file("combined.data.tsv");
 
-    if(file.is_open()) {
+    if (file.is_open()) {
         string line;
-        while(std::getline(file, line)) {
+        while (std::getline(file, line)) {
             istringstream stream(line);
             string title;
             string year;
@@ -33,14 +33,14 @@ void ReadInMovies (vector<Movie> &movies) {
             istringstream stream1(genres);
             string genre;
             vector<string> g;
-            while(getline(stream1, genre, ',')) {
+            while (getline(stream1, genre, ',')) {
                 g.push_back(genre);
             }
 
             istringstream stream2(directors);
             string director;
             vector<string> d;
-            while(getline(stream2, director, ',')) {
+            while (getline(stream2, director, ',')) {
                 d.push_back(director);
             }
 
@@ -50,7 +50,7 @@ void ReadInMovies (vector<Movie> &movies) {
 }
 
 int main() {
-	Movie movie;
+    Movie movie;
 
     // variables to parse input
     string action = "Action", adventure = "Adventure", animation = "Animation", biography = "Biography", comedy = "Comedy",
@@ -60,12 +60,12 @@ int main() {
         western = "Western";
 
     // vector to store movies after reading from the file
-	vector<Movie> movies;
+    vector<Movie> movies;
     ReadInMovies(movies);
     cout << movies.size() << endl;
-	
-	cout << "* Welcome to Movie Magic! *" << endl;
-	cout << "Our goal is to make finding movies suited to your tastes easier." << endl;
+
+    cout << "* Welcome to Movie Magic! *" << endl;
+    cout << "Our goal is to make finding movies suited to your tastes easier." << endl;
     cout << endl;
     cout << "Please enter up to three numbers corresponding to your favorite genres or type in your favorite director." << endl;
     cout << "(Ex. \"1 2 4\" or \"Ryan Coogler\")" << endl;
@@ -80,7 +80,7 @@ int main() {
     cout << "8. Drama          16. Mystery       24. Western" << endl;
     cout << "Type 0 to exit." << endl;
     cout << endl;
-	
+
     string line, read;
     istringstream stream(line);
     vector<int> input;
@@ -106,8 +106,8 @@ int main() {
                         }
                     }
                 }
-                
-                set<Movie> :: iterator iter;
+
+                set<Movie> ::iterator iter;
                 int count = 0;
                 movieArray = new Movie[movieSet.size()];
                 for (iter = movieSet.begin(); iter != movieSet.end(); ++iter) {
@@ -125,7 +125,7 @@ int main() {
                     for (int i = 0; i < movies.size(); i++) {
                         int genre = input.at(index);
                         vector<string> genres = movies.at(i).getGenre();
-                        
+
                         for (int j = 0; j < genres.size(); j++) {
                             if (genre == 1 && genres.at(j).compare(action) == 0) {
                                 movieSet.insert(movies.at(i));
@@ -202,7 +202,7 @@ int main() {
                         }
                     }
                     index++;
-                } 
+                }
                 set<Movie> ::iterator iter;
                 int count = 0;
                 movieArray = new Movie[movieSet.size()];
@@ -210,78 +210,80 @@ int main() {
                     movieArray[count] = *iter;
                 }
                 break;
-            } 
-        } 
+            }
+        }
         else {
             cout << "Please enter valid input" << endl;
             cout << endl;
         }
     }
 
-    cout << endl;
-    cout << "Please enter the criteria you would like to sort the movies on." << endl;
-    cout << "Ex. \"1\" or \"2\"" << endl;
-    cout << endl;
-    cout << "1. Length (from longest)" << endl;
-    cout << "2. Length (from shortest)" << endl;
-    cout << "3. Rating (from highest)" << endl;
-    cout << "4. Rating (from lowest)" << endl;
-    cout << "5. Number of Ratings (from highest)" << endl;
-    cout << "6. Number of Ratings (from lowest)" << endl;
-
     while (true) {
         if (exit) {
             break;
         }
-        string option;
-        cin >> option;
-        if (isdigit(option.at(0)) != 0) {
-            if (stoi(option) == 1) { // length from longest
-                // radix sort
+        cout << endl;
+        cout << "Please enter the criteria you would like to sort the movies on." << endl;
+        cout << "Ex. \"1\" or \"2\"" << endl;
+        cout << endl;
+        cout << "1. Length (from longest)" << endl;
+        cout << "2. Length (from shortest)" << endl;
+        cout << "3. Rating (from highest)" << endl;
+        cout << "4. Rating (from lowest)" << endl;
+        cout << "5. Number of Ratings (from highest)" << endl;
+        cout << "6. Number of Ratings (from lowest)" << endl;
+        while (true) {
+            string option;
+            cin >> option;
+            if (isdigit(option.at(0)) != 0) {
+                if (stoi(option) == 1) { // length from longest
+                    // radix sort
 
-                // quick sort
-		break;
+                    // quick sort
+                    break;
+                }
+                else if (stoi(option) == 2) { // length from shortest
+                    // radix sort
+
+                    // quick sort
+
+                    break;
+                }
+                else if (stoi(option) == 3) { // rating from highest
+                    // radix sort
+
+                    // quick sort
+                    break;
+                }
+                else if (stoi(option) == 4) { // rating from lowest
+                    // radix sort
+
+                    // quick sort
+
+                    break;
+                }
+                else if (stoi(option) == 5) { // number of ratings from highest
+                    // radix sort
+
+                    // quick sort
+                    break;
+                }
+                else if (stoi(option) == 6) { // number of ratings from lowest
+                    // radix sort
+
+                    // quick sort
+                    break;
+                }
             }
-            else if (stoi(option) == 2) { // length from shortest
-                // radix sort
-
-                // quick sort
-		    
-		break;
-            }
-            else if (stoi(option) == 3) { // rating from highest
-                // radix sort
-
-                // quick sort
-		break;
-            }
-            else if (stoi(option) == 4) { // rating from lowest
-                // radix sort
-
-                // quick sort
-		    
-		break;
-            }
-            else if (stoi(option) == 5) { // number of ratings from highest
-                // radix sort
-
-                // quick sort
-		break;
-            }
-            else if (stoi(option) == 6) { // number of ratings from lowest
-                // radix sort
-
-                // quick sort
-		break;
+            else {
+                cout << "Please enter a valid option." << endl;
             }
         }
-	else {
-	    cout << "Please enter a valid option." << endl;
-	}
+        break;
     }
     cout << endl;
-    
+
     cout << "Thank you for making Movie Magic!" << endl;
 
-	return 0;
+    return 0;
 }
