@@ -7,6 +7,7 @@
 #include "Movie.h"
 using namespace std;
 
+// storing movie objects from file
 void ReadInMovies(vector<Movie>& movies) {
     ifstream file("combined.data.tsv");
 
@@ -43,7 +44,7 @@ void ReadInMovies(vector<Movie>& movies) {
             while (getline(stream2, director, ',')) {
                 d.push_back(director);
             }
-
+            // creating movie object and pushing into movies vector
             movies.emplace_back(title, g, d, stoi(year), stoi(runtime), stof(rating), stoi(numRatings));
         }
     }
