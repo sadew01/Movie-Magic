@@ -55,9 +55,9 @@ int main() {
 
     // variables to parse input
     string action = "Action", adventure = "Adventure", animation = "Animation", biography = "Biography", comedy = "Comedy",
-        crime = "Crime", documentary = "Documentary", drama = "Drama", family = "Family", fantasy = "Fantasy", filmNoir = "Film Noir",
+        crime = "Crime", documentary = "Documentary", drama = "Drama", family = "Family", fantasy = "Fantasy", filmNoir = "Film-Noir",
         history = "History", horror = "Horror", music = "Music", musical = "Musical", mystery = "Mystery", romance = "Romance",
-        sciFi = "Sci-Fi", shortFilm = "Short Film", sport = "Sport", superhero = "Superhero", thriller = "Thriller", war = "War",
+        sciFi = "Sci-Fi", shortFilm = "Short", sport = "Sport", superhero = "Superhero", thriller = "Thriller", war = "War",
         western = "Western";
 
     // vector to store movies after reading from the file
