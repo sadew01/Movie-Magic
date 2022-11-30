@@ -26,6 +26,9 @@ public:
     int getLength();
     float getRating();
     int getNumRatings();
+    
+    // print info
+    void print();
 
     // input validation
     bool validInput(string line);
