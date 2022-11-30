@@ -5,7 +5,7 @@
 #include <utility>
 using namespace std;
 
-
+// constructor
 Movie::Movie(string title, vector<string>& genre, vector<string>& director, int year, int length, float rating, int numRatings) {
     this->title = title;
     this->genre = genre;
@@ -16,6 +16,7 @@ Movie::Movie(string title, vector<string>& genre, vector<string>& director, int 
     this->numRatings = numRatings;
 }
 
+// get functions
 string Movie::getTitle() {
     return this->title;
 }
@@ -37,6 +38,39 @@ float Movie::getRating() {
 int Movie::getNumRatings() {
     return this->numRatings;
 }
+
+// printing movie info
+void Movie::print() {
+    cout << this->title << endl;
+    cout << this->year << endl;
+
+    cout << "Genre: ";
+    // iterating through each genre (if necessary)
+    for(string s : this->genre) {
+        cout << s;
+        if(s != genre.at(genre.size() - 1)) {
+            cout << ", ";
+        }
+    }
+    cout << endl;
+
+    cout << "Director: ";
+    // iterating through each director (if necessary)
+    for(string s : this->director) {
+        cout << s;
+        if(s != director.at(director.size() - 1)) {
+            cout << ", ";
+        }
+    }
+    cout << endl;
+
+    cout << "Rating: " << this->rating << endl;
+    cout << "Runtime: " << this->length << " minutes" << endl;
+    // line between each movie
+    cout << endl;
+
+}
+
 void Movie::swap(int* a, int* b) { // This code is from the sorting lecture slides
     int t = *a;
     *a = *b;
