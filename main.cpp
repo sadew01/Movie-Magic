@@ -4,8 +4,10 @@
 #include <sstream>
 #include <string>
 #include <set>
+#include <chrono>
 #include "Movie.h"
 using namespace std;
+using namespace std::chrono;
 
 // storing movie objects from file
 void ReadInMovies(vector<Movie>& movies) {
@@ -63,7 +65,6 @@ int main() {
     // vector to store movies after reading from the file
     vector<Movie> movies;
     ReadInMovies(movies);
-    cout << movies.size() << endl;
 
     cout << "* Welcome to Movie Magic! *" << endl;
     cout << "Our goal is to make finding movies suited to your tastes easier." << endl;
@@ -83,7 +84,6 @@ int main() {
     cout << endl;
 
     string line, read;
-    istringstream stream(line);
     vector<int> input;
     set<Movie> movieSet;
     Movie* movieArray;
@@ -91,6 +91,7 @@ int main() {
 
     while (true) {
         getline(cin, line);
+        istringstream stream(line);
 
         if (line.at(0) == '0' && line.length() == 1) {
             exit = true;
@@ -106,13 +107,6 @@ int main() {
                             movieSet.insert(movies.at(i));
                         }
                     }
-                }
-
-                set<Movie> ::iterator iter;
-                int count = 0;
-                movieArray = new Movie[movieSet.size()];
-                for (iter = movieSet.begin(); iter != movieSet.end(); ++iter) {
-                    movieArray[count] = *iter;
                 }
                 break;
             }
@@ -204,12 +198,6 @@ int main() {
                     }
                     index++;
                 }
-                set<Movie> ::iterator iter;
-                int count = 0;
-                movieArray = new Movie[movieSet.size()];
-                for (iter = movieSet.begin(); iter != movieSet.end(); ++iter) {
-                    movieArray[count] = *iter;
-                }
                 break;
             }
         }
@@ -219,71 +207,200 @@ int main() {
         }
     }
 
+    set<Movie> ::iterator iter;
+    int count = 0;
+    movieArray = new Movie[movieSet.size()];
+    for (iter = movieSet.begin(); iter != movieSet.end(); ++iter) {
+        movieArray[count] = *iter;
+        count++;
+    }
+
     while (true) {
         if (exit) {
             break;
         }
-        cout << endl;
-        cout << "Please enter the criteria you would like to sort the movies on." << endl;
-        cout << "Ex. \"1\" or \"2\"" << endl;
-        cout << endl;
-        cout << "1. Length (from longest)" << endl;
-        cout << "2. Length (from shortest)" << endl;
-        cout << "3. Rating (from highest)" << endl;
-        cout << "4. Rating (from lowest)" << endl;
-        cout << "5. Number of Ratings (from highest)" << endl;
-        cout << "6. Number of Ratings (from lowest)" << endl;
-        while (true) {
+        if (movieSet.size() == 0) {
+            cout << "No movies corresponded to your search." << endl;
+            break;
+        }
+
+        bool another = true;
+
+        while (another) {
+            cout << endl;
+            cout << "Please enter the criteria you would like to sort the movies on." << endl;
+            cout << "Ex. \"1\" or \"2\"" << endl;
+            cout << endl;
+            cout << "1. Length (from longest)" << endl;
+            cout << "2. Length (from shortest)" << endl;
+            cout << "3. Rating (from highest)" << endl;
+            cout << "4. Rating (from lowest)" << endl;
+            cout << "5. Number of Ratings (from highest)" << endl;
+            cout << "6. Number of Ratings (from lowest)" << endl;
+            cout << "Type 0 to exit." << endl;
+            cout << endl;
+
+            another = false;
             string option;
             cin >> option;
-            if (isdigit(option.at(0)) != 0) {
+            if (isdigit(option.at(0)) != 0 && stoi(option) >= 0 && stoi(option) <= 6) {
                 if (stoi(option) == 1) { // length from longest
+                    cout << endl;
                     // radix sort
+                    auto start = high_resolution_clock::now();
+                    movie.radixSortLength(movieArray, movieSet.size());
+                    auto stop = high_resolution_clock::now();
+                    auto duration = duration_cast<nanoseconds>(stop - start);
+
+                    cout << "Radix Sort (" << duration.count() << " nanoseconds)" << endl;
+                    cout << endl;
+
+                    int current = 1;
+                    for (int i = movieSet.size() - 1; i >= movieSet.size() - 100; i--) {
+                        cout << current << ". ";
+                        movieArray[i].print();
+                        current++;
+                    }
 
                     // quick sort
-                    break;
                 }
                 else if (stoi(option) == 2) { // length from shortest
+                    cout << endl;
                     // radix sort
+                    auto start = high_resolution_clock::now();
+                    movie.radixSortLength(movieArray, movieSet.size());
+                    auto stop = high_resolution_clock::now();
+                    auto duration = duration_cast<nanoseconds>(stop - start);
+
+                    cout << "Radix Sort (" << duration.count() << " nanoseconds)" << endl;
+                    cout << endl;
+                    for (int i = 1; i <= 100; i++) {
+                        cout << i << ". ";
+                        movieArray[i].print();
+                    }
+
 
                     // quick sort
 
-                    break;
                 }
                 else if (stoi(option) == 3) { // rating from highest
+                    cout << endl;
                     // radix sort
+                    auto start = high_resolution_clock::now();
+                    movie.radixSortRatings(movieArray, movieSet.size());
+                    auto stop = high_resolution_clock::now();
+                    auto duration = duration_cast<nanoseconds>(stop - start);
 
+                    cout << "Radix Sort (" << duration.count() << " nanoseconds)" << endl;
+                    cout << endl;
+                    int current = 1;
+                    for (int i = movieSet.size() - 1; i >= movieSet.size() - 100; i--) {
+                        cout << current << ". ";
+                        movieArray[i].print();
+                        current++;
+                    }
                     // quick sort
-                    break;
                 }
                 else if (stoi(option) == 4) { // rating from lowest
+                    cout << endl;
                     // radix sort
+                    auto start = high_resolution_clock::now();
+                    movie.radixSortRatings(movieArray, movieSet.size());
+                    auto stop = high_resolution_clock::now();
+                    auto duration = duration_cast<nanoseconds>(stop - start);
 
+                    cout << "Radix Sort (" << duration.count() << " nanoseconds)" << endl;
+                    cout << endl;
+                    for (int i = 1; i <= 100; i++) {
+                        cout << i << ". ";
+                        movieArray[i].print();
+                    }
                     // quick sort
 
-                    break;
                 }
                 else if (stoi(option) == 5) { // number of ratings from highest
+                    cout << endl;
                     // radix sort
+                    auto start = high_resolution_clock::now();
+                    movie.radixSortNumRatings(movieArray, movieSet.size());
+                    auto stop = high_resolution_clock::now();
+                    auto duration = duration_cast<nanoseconds>(stop - start);
 
+                    cout << "Radix Sort (" << duration.count() << " nanoseconds)" << endl;
+                    cout << endl;
+                    int current = 1;
+                    for (int i = movieSet.size() - 1; i >= movieSet.size() - 100; i--) {
+                        cout << current << ". ";
+                        movieArray[i].print();
+                        current++;
+                    }
                     // quick sort
-                    break;
                 }
                 else if (stoi(option) == 6) { // number of ratings from lowest
+                    cout << endl;
                     // radix sort
+                    auto start = high_resolution_clock::now();
+                    movie.radixSortNumRatings(movieArray, movieSet.size());
+                    auto stop = high_resolution_clock::now();
+                    auto duration = duration_cast<nanoseconds>(stop - start);
 
+                    cout << "Radix Sort (" << duration.count() << " nanoseconds)" << endl;
+                    cout << endl;
+                    movie.radixSortNumRatings(movieArray, movieSet.size());
+                    cout << "Radix Sort" << endl;
+                    cout << endl;
+                    for (int i = 1; i <= 100; i++) {
+                        cout << i << ". ";
+                        movieArray[i].print();
+                    }
                     // quick sort
-                    break;
+                }
+                else if (stoi(option) == 0) {
+                    exit = true;
                 }
             }
             else {
                 cout << "Please enter a valid option." << endl;
+                another = true;
+                continue;
+            }
+
+            if (exit) {
+                break;
+            }
+
+            cout << endl;
+            cout << "Type 1 if you would like to test another option or 0 to exit." << endl;
+            cout << endl;
+            bool anotherTime = true;
+
+            while (anotherTime) {
+                anotherTime = false;
+                cin >> option;
+                if (isdigit(option.at(0)) != 0 && stoi(option) >= 0 && stoi(option) <= 1) {
+                    if (stoi(option) == 0) {
+                        exit = true;
+                        another = false;
+                        anotherTime = false;
+                        break;
+                    }
+                    else if (stoi(option) == 1) {
+                        another = true;
+                        anotherTime = false;
+                    }
+                    else {
+                        cout << "Please enter a valid option." << endl;
+                        anotherTime = true;
+                    }
+                }
+                else {
+                    cout << "Please enter a valid option." << endl;
+                    anotherTime = true;
+                }
             }
         }
-        break;
     }
     cout << endl;
-
     cout << "Thank you for making Movie Magic!" << endl;
 
     return 0;
