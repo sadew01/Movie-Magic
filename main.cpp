@@ -255,15 +255,25 @@ int main() {
                     cout << "Radix Sort (" << duration.count() << " nanoseconds)" << endl;
                     cout << endl;
 
-                    int current = 1;
-                    for (int i = movieSet.size() - 1; i >= movieSet.size() - 100; i--) {
-                        cout << current << ". ";
-                        movieArray[i].print();
-                        current++;
+                    if (movieSet.size() < 100) {
+                        int current = 1;
+                        for (int i = movieSet.size() - 1; i >= 0; i--) {
+                            cout << current << ". ";
+                            movieArray[i].print();
+                            current++;
+                        }
+                    }
+                    else {
+                        int current = 1;
+                        for (int i = movieSet.size() - 1; i >= movieSet.size() - 100; i--) {
+                            cout << current << ". ";
+                            movieArray[i].print();
+                            current++;
+                        }
                     }
 
-                    movie.quickSort(movieArray, 0, movieSet.size());
-                    movie.PrintArray(movieArray, movieSet.size());// quick sort
+                    // quick sort
+                    cout << "Quick sort" << endl;
                 }
                 else if (stoi(option) == 2) { // length from shortest
                     cout << endl;
@@ -275,9 +285,17 @@ int main() {
 
                     cout << "Radix Sort (" << duration.count() << " nanoseconds)" << endl;
                     cout << endl;
-                    for (int i = 1; i <= 100; i++) {
-                        cout << i << ". ";
-                        movieArray[i].print();
+                    if (movieSet.size() < 100) {
+                        for (int i = 0; i < movieSet.size(); i++) {
+                            cout << i + 1 << ". ";
+                            movieArray[i].print();
+                        }
+                    }
+                    else {
+                        for (int i = 0; i < 100; i++) {
+                            cout << i + 1 << ". ";
+                            movieArray[i].print();
+                        }
                     }
 
 
@@ -294,12 +312,23 @@ int main() {
 
                     cout << "Radix Sort (" << duration.count() << " nanoseconds)" << endl;
                     cout << endl;
-                    int current = 1;
-                    for (int i = movieSet.size() - 1; i >= movieSet.size() - 100; i--) {
-                        cout << current << ". ";
-                        movieArray[i].print();
-                        current++;
+                    if (movieSet.size() < 100) {
+                        int current = 1;
+                        for (int i = movieSet.size() - 1; i >= 0; i--) {
+                            cout << current << ". ";
+                            movieArray[i].print();
+                            current++;
+                        }
                     }
+                    else {
+                        int current = 1;
+                        for (int i = movieSet.size() - 1; i >= movieSet.size() - 100; i--) {
+                            cout << current << ". ";
+                            movieArray[i].print();
+                            current++;
+                        }
+                    }
+                    
                     // quick sort
                 }
                 else if (stoi(option) == 4) { // rating from lowest
@@ -312,9 +341,17 @@ int main() {
 
                     cout << "Radix Sort (" << duration.count() << " nanoseconds)" << endl;
                     cout << endl;
-                    for (int i = 1; i <= 100; i++) {
-                        cout << i << ". ";
-                        movieArray[i].print();
+                    if (movieSet.size() < 100) {
+                        for (int i = 0; i < movieSet.size(); i++) {
+                            cout << i + 1 << ". ";
+                            movieArray[i].print();
+                        }
+                    }
+                    else {
+                        for (int i = 0; i < 100; i++) {
+                            cout << i + 1 << ". ";
+                            movieArray[i].print();
+                        }
                     }
                     // quick sort
 
@@ -329,11 +366,21 @@ int main() {
 
                     cout << "Radix Sort (" << duration.count() << " nanoseconds)" << endl;
                     cout << endl;
-                    int current = 1;
-                    for (int i = movieSet.size() - 1; i >= movieSet.size() - 100; i--) {
-                        cout << current << ". ";
-                        movieArray[i].print();
-                        current++;
+                    if (movieSet.size() < 100) {
+                        int current = 1;
+                        for (int i = movieSet.size() - 1; i >= 0; i--) {
+                            cout << current << ". ";
+                            movieArray[i].print();
+                            current++;
+                        }
+                    }
+                    else {
+                        int current = 1;
+                        for (int i = movieSet.size() - 1; i >= movieSet.size() - 100; i--) {
+                            cout << current << ". ";
+                            movieArray[i].print();
+                            current++;
+                        }
                     }
                     // quick sort
                 }
@@ -350,10 +397,19 @@ int main() {
                     movie.radixSortNumRatings(movieArray, movieSet.size());
                     cout << "Radix Sort" << endl;
                     cout << endl;
-                    for (int i = 1; i <= 100; i++) {
-                        cout << i << ". ";
-                        movieArray[i].print();
+                    if (movieSet.size() < 100) {
+                        for (int i = 0; i < movieSet.size(); i++) {
+                            cout << i + 1 << ". ";
+                            movieArray[i].print();
+                        }
                     }
+                    else {
+                        for (int i = 0; i < 100; i++) {
+                            cout << i + 1 << ". ";
+                            movieArray[i].print();
+                        }
+                    }
+                    
                     // quick sort
                 }
                 else if (stoi(option) == 0) {
@@ -404,5 +460,6 @@ int main() {
     cout << endl;
     cout << "Thank you for making Movie Magic!" << endl;
 
+    delete[] movieArray;
     return 0;
 }
