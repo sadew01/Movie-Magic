@@ -87,6 +87,7 @@ int main() {
     vector<int> input;
     set<Movie> movieSet;
     Movie* movieArray;
+    Movie* movieArray2;
     bool exit = false;
 
     while (true) {
@@ -210,6 +211,11 @@ int main() {
     set<Movie> ::iterator iter;
     int count = 0;
     movieArray = new Movie[movieSet.size()];
+    for (iter = movieSet.begin(); iter != movieSet.end(); ++iter) {
+        movieArray[count] = *iter;
+        count++;
+    }
+    movieArray2 = new Movie[movieSet.size()];
     for (iter = movieSet.begin(); iter != movieSet.end(); ++iter) {
         movieArray[count] = *iter;
         count++;
@@ -461,5 +467,6 @@ int main() {
     cout << "Thank you for making Movie Magic!" << endl;
 
     delete[] movieArray;
+    delete[] movieArray2;
     return 0;
 }
