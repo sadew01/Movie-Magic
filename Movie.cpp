@@ -68,37 +68,8 @@ void Movie::print() {
     cout << "    Runtime: " << this->length << " minutes" << endl;
 }
 
-void Movie::swap(int* a, int* b) { // This code is from the sorting lecture slides
-    int t = *a;
-    *a = *b;
-    *b = t;
-}
-int Movie::partition(int arr[], int low, int high) { // This code is from the sorting lecture slides
-    int pivot = arr[low];
-    int up = low;
-    int down = high;
-    while (up < down) {
-        for (int j = up; j < high; j++) {
-            if (arr[up] > pivot) {
-                break;
-            }
-            up++;
-        }
-        for (int j = high; j > low; j--) {
-            if (arr[down] < pivot) {
-                break;
-            }
-            down--;
-        }
-        if (up < down) {
-            swap(&arr[up], &arr[down]);
-        }
-    }
-    swap(&arr[low], &arr[down]);
-    return down;
-}
 
-int Movie::partition(vector<Movie> arr, int low, int high) { // This code is from the sorting lecture slides
+int Movie::partition(Movie* arr, int low, int high) { // This code is from the sorting lecture slides
     int pivot = arr[low].getLength();
     int up = low;
     int down = high;
@@ -123,7 +94,7 @@ int Movie::partition(vector<Movie> arr, int low, int high) { // This code is fro
     return down;
 }
 
-void Movie::quickSort(vector<Movie> arr, int low, int high) { // This code is from the sorting lecture slides
+void Movie::quickSort(Movie* arr, int low, int high) { // This code is from the sorting lecture slides
     
     if (low < high) {
         int pivot = partition(arr, low, high);
@@ -132,14 +103,15 @@ void Movie::quickSort(vector<Movie> arr, int low, int high) { // This code is fr
     }
 }
 
-void Movie::PrintArray(vector<Movie> arr, int size) {	
+void Movie::PrintArray(Movie* arr, int size) {
     // This code is from the sorting lecture slides
     cout << "Length (from longest): " << endl;
     for (int i = 0; i < size; i++) {
-        cout <<  arr.at(i).getTitle() << arr.at(i).getLength() << endl;
+        cout <<  arr[i].getTitle() << arr[i].getLength() << endl;
 
     }
 }
+
 bool Movie::validInput(string line) {
     if (isName(line)) {
         if (validDirectorName(line)) {
