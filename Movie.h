@@ -39,9 +39,9 @@ public:
     bool isName(string line);
 
     // quick sort
-   int partition(vector<Movie> arr, int low, int high);	// helper functions for Quick Sort
-    void quickSort(vector<Movie> arr, int low, int high);
-    void PrintArray(vector<Movie> arr, int size);
+  int partition(Movie* arr, int low, int high);	// helper functions for Quick Sort
+    void quickSort(Movie* arr, int low, int high);
+    void PrintArray(Movie* arr, int size);
 
     // radix sort length
     void radixSortLength(Movie* movies, int size);
