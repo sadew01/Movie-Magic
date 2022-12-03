@@ -218,7 +218,7 @@ int main() {
     count = 0;
     movieArray2 = new Movie[movieSet.size()];
     for (iter = movieSet.begin(); iter != movieSet.end(); ++iter) {
-        movieArray[count] = *iter;
+        movieArray2[count] = *iter;
         count++;
     }
 
@@ -250,6 +250,8 @@ int main() {
             another = false;
             string option;
             cin >> option;
+
+            
             if (isdigit(option.at(0)) != 0 && stoi(option) >= 0 && stoi(option) <= 6) {
                 if (stoi(option) == 1) { // length from longest
                     cout << endl;
@@ -278,9 +280,34 @@ int main() {
                             current++;
                         }
                     }
-
+                    
                     // quick sort
-                    cout << "Quick sort" << endl;
+                    auto start1 = high_resolution_clock::now();
+                    movie.quickSort(movieArray2, 0, movieSet.size() - 1);
+                    auto stop1 = high_resolution_clock::now();
+                    auto duration1 = duration_cast<nanoseconds>(stop1 - start1);
+
+                    cout << "Quick Sort (" << duration1.count() << " nanoseconds)" << endl;
+                    cout << endl;
+                    if (movieSet.size() < 100) {
+                        int current = 1;
+                        for (int i = movieSet.size() - 1; i >= 0; i--) {
+                            cout << current << ". ";
+                            movieArray2[i].print();
+                            current++;
+                        }
+                    }
+                    else {
+                        int current = 1;
+                        for (int i = movieSet.size() - 1; i >= movieSet.size() - 100; i--) {
+                            cout << current << ". ";
+                            movieArray2[i].print();
+                            current++;
+                        }
+                    }
+
+                    
+                    
                 }
                 else if (stoi(option) == 2) { // length from shortest
                     cout << endl;
@@ -304,9 +331,30 @@ int main() {
                             movieArray[i].print();
                         }
                     }
-
-
                     // quick sort
+
+                    auto start1 = high_resolution_clock::now();
+                    movie.quickSort(movieArray2, 0, movieSet.size() - 1);
+                    auto stop1 = high_resolution_clock::now();
+                    auto duration1 = duration_cast<nanoseconds>(stop1 - start1);
+
+                    cout << "Quick Sort (" << duration1.count() << " nanoseconds)" << endl;
+                    cout << endl;
+
+                    if (movieSet.size() < 100) {
+                        for (int i = 0; i < movieSet.size(); i++) {
+                            cout << i + 1 << ". ";
+                            movieArray2[i].print();
+                        }
+                    }
+                    else {
+                        for (int i = 0; i < 100; i++) {
+                            cout << i + 1 << ". ";
+                            movieArray2[i].print();
+                        }
+                    }
+
+                    
 
                 }
                 else if (stoi(option) == 3) { // rating from highest
@@ -337,6 +385,30 @@ int main() {
                     }
 
                     // quick sort
+                    cout << endl;
+                    auto start1 = high_resolution_clock::now();
+                    movie.quickSortRatings(movieArray2, 0, movieSet.size() - 1);
+                    auto stop1 = high_resolution_clock::now();
+                    auto duration1 = duration_cast<nanoseconds>(stop1 - start1);
+                    cout << "Quick Sort (" << duration1.count() << " nanoseconds)" << endl;
+                    cout << endl;
+                    if (movieSet.size() < 100) {
+                        int current = 1;
+                        for (int i = movieSet.size() - 1; i >= 0; i--) {
+                            cout << current << ". ";
+                            movieArray2[i].print();
+                            current++;
+                        }
+                    }
+                    else {
+                        int current = 1;
+                        for (int i = movieSet.size() - 1; i >= movieSet.size() - 100; i--) {
+                            cout << current << ". ";
+                            movieArray2[i].print();
+                            current++;
+                        }
+                    }
+
                 }
                 else if (stoi(option) == 4) { // rating from lowest
                     cout << endl;
@@ -361,6 +433,25 @@ int main() {
                         }
                     }
                     // quick sort
+                    auto start1 = high_resolution_clock::now();
+                    movie.quickSortRatings(movieArray2, 0, movieSet.size() - 1);
+                    auto stop1 = high_resolution_clock::now();
+                    auto duration1 = duration_cast<nanoseconds>(stop1 - start1);
+                    cout << "Quick Sort (" << duration.count() << " nanoseconds)" << endl;
+                    cout << endl;
+                    if (movieSet.size() < 100) {
+                        for (int i = 0; i < movieSet.size(); i++) {
+                            cout << i + 1 << ". ";
+                            movieArray2[i].print();
+                        }
+                    }
+                    else {
+                        for (int i = 0; i < 100; i++) {
+                            cout << i + 1 << ". ";
+                            movieArray2[i].print();
+                        }
+                    }
+
 
                 }
                 else if (stoi(option) == 5) { // number of ratings from highest
@@ -389,7 +480,33 @@ int main() {
                             current++;
                         }
                     }
+
+
                     // quick sort
+                    cout << endl;
+                    auto start1 = high_resolution_clock::now();
+                    movie.quickSortNumOfRatings(movieArray2, 0, movieSet.size() - 1);
+                    auto stop1 = high_resolution_clock::now();
+                    auto duration1 = duration_cast<nanoseconds>(stop1 - start1);
+                    cout << "Quick Sort (" << duration1.count() << " nanoseconds)" << endl;
+                    cout << endl;
+                    if (movieSet.size() < 100) {
+                        int current = 1;
+                        for (int i = movieSet.size() - 1; i >= 0; i--) {
+                            cout << current << ". ";
+                            movieArray2[i].print();
+                            current++;
+                        }
+                    }
+                    else {
+                        int current = 1;
+                        for (int i = movieSet.size() - 1; i >= movieSet.size() - 100; i--) {
+                            cout << current << ". ";
+                            movieArray2[i].print();
+                            current++;
+                        }
+                    }
+
                 }
                 else if (stoi(option) == 6) { // number of ratings from lowest
                     cout << endl;
@@ -418,6 +535,25 @@ int main() {
                     }
 
                     // quick sort
+                    auto start1 = high_resolution_clock::now();
+                    movie.quickSortNumOfRatings(movieArray2, 0, movieSet.size() - 1);
+                    auto stop1 = high_resolution_clock::now();
+                    auto duration1 = duration_cast<nanoseconds>(stop1 - start1);
+                    cout << "Quick Sort (" << duration.count() << " nanoseconds)" << endl;
+                    cout << endl;
+                    if (movieSet.size() < 100) {
+                        for (int i = 0; i < movieSet.size(); i++) {
+                            cout << i + 1 << ". ";
+                            movieArray2[i].print();
+                        }
+                    }
+                    else {
+                        for (int i = 0; i < 100; i++) {
+                            cout << i + 1 << ". ";
+                            movieArray2[i].print();
+                        }
+                    }
+
                 }
                 else if (stoi(option) == 0) {
                     exit = true;
