@@ -262,7 +262,8 @@ int main() {
                         current++;
                     }
 
-                    // quick sort
+                    movie.quickSort(movies, 0, movies.size() - 1);
+                    movie.PrintArray(movies, movies.size());// quick sort
                 }
                 else if (stoi(option) == 2) { // length from shortest
                     cout << endl;
