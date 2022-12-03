@@ -98,7 +98,33 @@ int Movie::partition(int arr[], int low, int high) { // This code is from the so
     return down;
 }
 
-void Movie::quickSort(int arr[], int low, int high) { // This code is from the sorting lecture slides
+int Movie::partition(vector<Movie> arr, int low, int high) { // This code is from the sorting lecture slides
+    int pivot = arr[low].getLength();
+    int up = low;
+    int down = high;
+    while (up < down) {
+        for (int j = up; j < high; j++) {
+            if (arr[up].getLength() > pivot) {
+                break;
+            }
+            up++;
+        }
+        for (int j = high; j > low; j--) {
+            if (arr[down].getLength() < pivot) {
+                break;
+            }
+            down--;
+        }
+        if (up < down) {
+            swap(arr[up], arr[down]);
+        }
+    }
+    swap(arr[low], arr[down]);
+    return down;
+}
+
+void Movie::quickSort(vector<Movie> arr, int low, int high) { // This code is from the sorting lecture slides
+    
     if (low < high) {
         int pivot = partition(arr, low, high);
         quickSort(arr, low, pivot - 1);
@@ -106,13 +132,14 @@ void Movie::quickSort(int arr[], int low, int high) { // This code is from the s
     }
 }
 
-void Movie::PrintArray(int arr[], int size) {		// This code is from the sorting lecture slides
+void Movie::PrintArray(vector<Movie> arr, int size) {	
+    // This code is from the sorting lecture slides
+    cout << "Length (from longest): " << endl;
     for (int i = 0; i < size; i++) {
-        cout << arr[i] << " ";
+        cout <<  arr.at(i).getTitle() << arr.at(i).getLength() << endl;
 
     }
 }
-
 bool Movie::validInput(string line) {
     if (isName(line)) {
         if (validDirectorName(line)) {
