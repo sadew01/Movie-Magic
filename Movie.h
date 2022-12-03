@@ -26,7 +26,7 @@ public:
     int getLength();
     float getRating();
     int getNumRatings();
-    
+
     // print info
     void print();
 
@@ -45,19 +45,19 @@ public:
     void PrintArray(int arr[], int size);
 
     // radix sort length
-    void radixSortLength(Movie movies[], int size);
-    void radixSortLengthHelper(Movie movies[], int size, int digit);
-    int findMaxLength(Movie movies[], int size);
+    void radixSortLength(Movie* movies, int size);
+    void radixSortLengthHelper(Movie* movies, int size, int digit);
+    int findMaxLength(Movie* movies, int size);
 
     // radix sort ratings
-    void radixSortRatings(Movie movies[], int size);
-    void radixSortRatingsHelper(Movie movies[], int size, int digit);
-    int findMaxRating(Movie movies[], int size);
+    void radixSortRatings(Movie* movies, int size);
+    void radixSortRatingsHelper(Movie* movies, int size, int digit);
+    int findMaxRating(Movie* movies, int size);
 
     // radix sort numratings
-    void radixSortNumRatings(Movie movies[], int size);
-    void radixSortNumRatingsHelper(Movie movies[], int size, int digit);
-    int findMaxNumRating(Movie movies[], int size);
+    void radixSortNumRatings(Movie* movies, int size);
+    void radixSortNumRatingsHelper(Movie* movies, int size, int digit);
+    int findMaxNumRating(Movie* movies, int size);
 
     // operator overload to add object to set
     bool operator<(const Movie& movie1) const;
