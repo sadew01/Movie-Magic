@@ -42,33 +42,30 @@ int Movie::getNumRatings() {
 // printing movie info
 void Movie::print() {
     cout << this->title << endl;
-    cout << this->year << endl;
+    cout << "    Year: " << this->year << endl;
 
-    cout << "Genre: ";
+    cout << "    Genre(s): ";
     // iterating through each genre (if necessary)
-    for(string s : this->genre) {
+    for (string s : this->genre) {
         cout << s;
-        if(s != genre.at(genre.size() - 1)) {
+        if (s != genre.at(genre.size() - 1)) {
             cout << ", ";
         }
     }
     cout << endl;
 
-    cout << "Director: ";
+    cout << "    Director(s): ";
     // iterating through each director (if necessary)
-    for(string s : this->director) {
+    for (string s : this->director) {
         cout << s;
-        if(s != director.at(director.size() - 1)) {
+        if (s != director.at(director.size() - 1)) {
             cout << ", ";
         }
     }
     cout << endl;
 
-    cout << "Rating: " << this->rating << endl;
-    cout << "Runtime: " << this->length << " minutes" << endl;
-    // line between each movie
-    cout << endl;
-
+    cout << "    Rating: " << this->rating << " (Out of " << this->numRatings << ")" << endl;
+    cout << "    Runtime: " << this->length << " minutes" << endl;
 }
 
 void Movie::swap(int* a, int* b) { // This code is from the sorting lecture slides
@@ -208,20 +205,53 @@ bool Movie::operator<(const Movie& movie1) const {
     return title < movie1.title;
 }
 
-// radix sort length
-void Movie::radixSortLength(Movie movies[], int size) {
+void Movie::radixSortLength(Movie* movies, int size) {
+    
     int max = findMaxLength(movies, size);
 
+    
     for (int digit = 1; max / digit > 0; digit *= 10) {
         radixSortLengthHelper(movies, size, digit);
     }
+    
 }
 
-void Movie::radixSortLengthHelper(Movie movies[], int size, int digit) {
+void Movie::radixSortLengthHelper(Movie* movies, int size, int digit) {
+    
+    
+    // create temp array same size as original
+    Movie* temp = new Movie[size];
 
+    
+    // create a counting array to store count of each digit 0-9
+    int count[10] = { 0 };
+
+    // store the number of occurences of each character
+    for (int i = 0; i < size; i++) {
+        count[(movies[i].getLength() / digit) % 10]++;
+    }
+
+    // update the count array to reflect the position in the final array
+    for (int i = 1; i < 10; i++) {
+        count[i] += count[i - 1];
+    }
+
+    // transfer the values into the temporary array
+    for (int i = size - 1; i >= 0; i--) {
+        temp[count[(movies[i].getLength() / digit) % 10] - 1] = movies[i];
+        count[(movies[i].getLength() / digit) % 10]--;
+    }
+
+    for (int i = 0; i < size; i++) {
+        movies[i] = temp[i];
+    }
+    
+    delete[] temp;
+  
 }
 
-int Movie::findMaxLength(Movie movies[], int size) {
+int Movie::findMaxLength(Movie* movies, int size) {
+    // finds max length
     int max = movies[0].getLength();
     for (int i = 0; i < size; i++) {
         if (movies[i].getLength() > max) {
@@ -231,57 +261,104 @@ int Movie::findMaxLength(Movie movies[], int size) {
     return max;
 }
 
-// radix sort ratings
-void Movie::radixSortRatings(Movie movies[], int size) {
-    /*
+void Movie::radixSortRatings(Movie* movies, int size) {
     int* temp = new int[size];
-
     for (int i = 0; i < size; i++) {
-        temp[i] = (movies[i] * (float)10);
+        movies[i].rating = movies[i].rating * 10.0;
     }
 
-    int max = findMaxVal(temp, size);
-
+    int max = findMaxRating(movies, size);
     for (int digit = 1; max / digit > 0; digit *= 10) {
-        radixSortHelper(temp, size, digit);
+        radixSortRatingsHelper(movies, size, digit);
     }
 
     for (int i = 0; i < size; i++) {
-        movies[i] = ((float)temp[i] / (float)10);
+        movies[i].rating = (float) movies[i].rating / (float) 10.0;
     }
-    */
 }
 
-void Movie::radixSortRatingsHelper(Movie movies[], int size, int digit) {
+void Movie::radixSortRatingsHelper(Movie* movies, int size, int digit) {
+    // create temp array same size as original
+    Movie* temp = new Movie[size];
 
+    // create a counting array to store count of each digit 0-9
+    int count[10] = { 0 };
+
+    // store the number of occurences of each character
+    for (int i = 0; i < size; i++) {
+        count[((int) movies[i].getRating() / digit) % 10]++;
+    }
+
+    // update the count array to reflect the position in the final array
+    for (int i = 1; i < 10; i++) {
+        count[i] += count[i - 1];
+    }
+
+    // transfer the values into the temporary array
+    for (int i = size - 1; i >= 0; i--) {
+        temp[count[((int) movies[i].getRating() / digit) % 10] - 1] = movies[i];
+        count[((int) movies[i].getRating() / digit) % 10]--;
+    }
+
+    for (int i = 0; i < size; i++) {
+        movies[i] = temp[i];
+    }
+
+    delete[] temp;
 }
 
-int Movie::findMaxRating(Movie movies[], int size) {
+int Movie::findMaxRating(Movie* movies, int size) {
+    // finds the max rating
     int max = movies[0].getRating();
     for (int i = 0; i < size; i++) {
-        if (movies[i].getRating() > max) {
-            max = movies[i].getRating();
+        if ((int) movies[i].getRating() > max) {
+            max = (int) movies[i].getRating();
         }
     }
     return max;
 }
 
-// radix sort numratings
-void Movie::radixSortNumRatings(Movie movies[], int size) {
-    /*
-    int max = findMaxVal(movies, size);
+void Movie::radixSortNumRatings(Movie* movies, int size) {
+    int max = findMaxNumRating(movies, size);
 
     for (int digit = 1; max / digit > 0; digit *= 10) {
-        radixSortHelper(movies, size, digit);
+        radixSortNumRatingsHelper(movies, size, digit);
     }
-    */
 }
 
-void Movie::radixSortNumRatingsHelper(Movie movies[], int size, int digit) {
+void Movie::radixSortNumRatingsHelper(Movie* movies, int size, int digit) {
+    // create temp array same size as original
+    Movie* temp = new Movie[size];
 
+
+    // create a counting array to store count of each digit 0-9
+    int count[10] = { 0 };
+
+    // store the number of occurences of each character
+    for (int i = 0; i < size; i++) {
+        count[(movies[i].getNumRatings() / digit) % 10]++;
+    }
+
+    // update the count array to reflect the position in the final array
+    for (int i = 1; i < 10; i++) {
+        count[i] += count[i - 1];
+    }
+
+    // transfer the values into the temporary array
+    for (int i = size - 1; i >= 0; i--) {
+        temp[count[(movies[i].getNumRatings() / digit) % 10] - 1] = movies[i];
+        count[(movies[i].getNumRatings() / digit) % 10]--;
+    }
+
+    for (int i = 0; i < size; i++) {
+        movies[i] = temp[i];
+    }
+
+    delete[] temp;
 }
 
-int Movie::findMaxNumRating(Movie movies[], int size) {
+int Movie::findMaxNumRating(Movie* movies, int size) {
+    // finds the max number of ratings
     int max = movies[0].getNumRatings();
     for (int i = 0; i < size; i++) {
         if (movies[i].getNumRatings() > max) {
