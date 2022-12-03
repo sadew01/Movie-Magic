@@ -39,9 +39,16 @@ public:
     bool isName(string line);
 
     // quick sort
-  int partition(Movie* arr, int low, int high);	// helper functions for Quick Sort
+    int partition(Movie* arr, int low, int high);
+  // helper functions for Quick Sort
+    void swap(Movie* a, Movie* b);
     void quickSort(Movie* arr, int low, int high);
+    void quickSortRatings(Movie* arr, int low, int high);
+    void quickSortNumOfRatings(Movie* arr, int low, int high);
+    int partitionRating(Movie* arr, int low, int high);
+    int partitionNumOfRatings(Movie* arr, int low, int high);
     void PrintArray(Movie* arr, int size);
+
 
     // radix sort length
     void radixSortLength(Movie* movies, int size);
