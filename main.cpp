@@ -215,6 +215,7 @@ int main() {
         movieArray[count] = *iter;
         count++;
     }
+    count = 0;
     movieArray2 = new Movie[movieSet.size()];
     for (iter = movieSet.begin(); iter != movieSet.end(); ++iter) {
         movieArray[count] = *iter;
@@ -334,7 +335,7 @@ int main() {
                             current++;
                         }
                     }
-                    
+
                     // quick sort
                 }
                 else if (stoi(option) == 4) { // rating from lowest
@@ -415,7 +416,7 @@ int main() {
                             movieArray[i].print();
                         }
                     }
-                    
+
                     // quick sort
                 }
                 else if (stoi(option) == 0) {
