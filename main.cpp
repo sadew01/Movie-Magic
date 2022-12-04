@@ -251,7 +251,7 @@ int main() {
             string option;
             cin >> option;
 
-            
+
             if (isdigit(option.at(0)) != 0 && stoi(option) >= 0 && stoi(option) <= 6) {
                 if (stoi(option) == 1) { // length from longest
                     cout << endl;
@@ -280,7 +280,8 @@ int main() {
                             current++;
                         }
                     }
-                    
+                    cout << endl;
+
                     // quick sort
                     auto start1 = high_resolution_clock::now();
                     movie.quickSort(movieArray2, 0, movieSet.size() - 1);
@@ -306,8 +307,8 @@ int main() {
                         }
                     }
 
-                    
-                    
+
+
                 }
                 else if (stoi(option) == 2) { // length from shortest
                     cout << endl;
@@ -331,6 +332,8 @@ int main() {
                             movieArray[i].print();
                         }
                     }
+                    cout << endl;
+
                     // quick sort
 
                     auto start1 = high_resolution_clock::now();
@@ -354,7 +357,7 @@ int main() {
                         }
                     }
 
-                    
+
 
                 }
                 else if (stoi(option) == 3) { // rating from highest
@@ -383,9 +386,9 @@ int main() {
                             current++;
                         }
                     }
+                    cout << endl;
 
                     // quick sort
-                    cout << endl;
                     auto start1 = high_resolution_clock::now();
                     movie.quickSortRatings(movieArray2, 0, movieSet.size() - 1);
                     auto stop1 = high_resolution_clock::now();
@@ -432,6 +435,8 @@ int main() {
                             movieArray[i].print();
                         }
                     }
+                    cout << endl;
+
                     // quick sort
                     auto start1 = high_resolution_clock::now();
                     movie.quickSortRatings(movieArray2, 0, movieSet.size() - 1);
@@ -480,10 +485,9 @@ int main() {
                             current++;
                         }
                     }
-
+                    cout << endl;
 
                     // quick sort
-                    cout << endl;
                     auto start1 = high_resolution_clock::now();
                     movie.quickSortNumOfRatings(movieArray2, 0, movieSet.size() - 1);
                     auto stop1 = high_resolution_clock::now();
@@ -519,8 +523,6 @@ int main() {
                     cout << "Radix Sort (" << duration.count() << " nanoseconds)" << endl;
                     cout << endl;
                     movie.radixSortNumRatings(movieArray, movieSet.size());
-                    cout << "Radix Sort" << endl;
-                    cout << endl;
                     if (movieSet.size() < 100) {
                         for (int i = 0; i < movieSet.size(); i++) {
                             cout << i + 1 << ". ";
@@ -533,6 +535,7 @@ int main() {
                             movieArray[i].print();
                         }
                     }
+                    cout << endl;
 
                     // quick sort
                     auto start1 = high_resolution_clock::now();
