@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include "Movie.h"
-#include <utility>
 using namespace std;
 
 // constructor
@@ -17,17 +16,11 @@ Movie::Movie(string title, vector<string>& genre, vector<string>& director, int 
 }
 
 // get functions
-string Movie::getTitle() {
-    return this->title;
-}
 vector<string>& Movie::getGenre() {
     return this->genre;
 }
 vector<string>& Movie::getDirector() {
     return this->director;
-}
-int Movie::getYear() {
-    return this->year;
 }
 int Movie::getLength() {
     return this->length;
@@ -75,8 +68,8 @@ void Movie::swap(Movie* a, Movie* b) {
     *b = t;
 }
 
-
-int Movie::partition(Movie* arr, int low, int high) { // This code is from the sorting lecture slides
+// This code is from the sorting lecture slides
+int Movie::partition(Movie* arr, int low, int high) {
     int pivot = arr[low].getLength();
     int up = low;
     int down = high;
@@ -101,7 +94,7 @@ int Movie::partition(Movie* arr, int low, int high) { // This code is from the s
     return down;
 }
 int Movie::partitionRating(Movie* arr, int low, int high) {
-    
+
     float pivot = arr[low].getRating();
     int up = low;
     int down = high;
@@ -176,45 +169,19 @@ void Movie::quickSortNumOfRatings(Movie* arr, int low, int high) {
     }
 }
 
-void Movie::PrintArray(Movie* arr, int size) {
-    // This code is from the sorting lecture slides
-    cout << "Length (from longest): " << endl;
-    for (int i = 0; i < size; i++) {
-        cout << arr[i].getTitle() << arr[i].getLength() << endl;
 
-    }
-}
-
-
-
-
-bool Movie::validInput(string line) {
-    if (isName(line)) {
-        if (validDirectorName(line)) {
-            return true;
-        }
-    }
-    else if (isNumber(line)) {
-        if (validGenreInput(line)) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
+// checks that a name is valid
 bool Movie::validDirectorName(string director) {
     for (int i = 0; i < director.length(); i++) {
-        if (isalpha(director.at(i)) != 0 || director.at(i) == ' ') {
-
-        }
-        else {
+        if (isalpha(director.at(i)) == 0 && director.at(i) != ' ') {
             return false;
         }
+
     }
     return true;
 }
 
+// checks that genre input is valid
 bool Movie::validGenreInput(string line) {
     istringstream stream(line);
     vector<int> input;
@@ -245,41 +212,24 @@ bool Movie::validGenreInput(string line) {
     return true;
 }
 
+// checks there are only numbers in input
 bool Movie::onlyNumbers(string line) {
     // check that genre input only contains numbers or spaces
     for (int i = 0; i < line.length(); i++) {
-        if (isdigit(line.at(i)) || line.at(i) == ' ') {
-
-        }
-        else {
+        if (!isdigit(line.at(i)) && line.at(i) != ' ') {
             return false;
         }
     }
     return true;
 }
 
-bool Movie::isName(string line) {
-    // if the first char is a letter, indicates director name input
-    if (isalpha(line.at(0)) != 0) {
-        return true;
-    }
-    return false;
-}
-
-bool Movie::isNumber(string line) {
-    // if the first char is a digit, indicates genre input
-    if (isdigit(line.at(0)) != 0) {
-        return true;
-    }
-    return false;
-}
 
 
 bool Movie::operator<(const Movie& movie1) const {
-    int one = movie1.numRatings;
     return title < movie1.title;
 }
 
+// radix sort for length
 void Movie::radixSortLength(Movie* movies, int size) {
 
     int max = findMaxLength(movies, size);
@@ -336,8 +286,9 @@ int Movie::findMaxLength(Movie* movies, int size) {
     return max;
 }
 
+// radix sort for ratings
 void Movie::radixSortRatings(Movie* movies, int size) {
-    int* temp = new int[size];
+
     for (int i = 0; i < size; i++) {
         movies[i].rating = movies[i].rating * 10.0;
     }
@@ -393,6 +344,7 @@ int Movie::findMaxRating(Movie* movies, int size) {
     return max;
 }
 
+// radix sort for numRatings
 void Movie::radixSortNumRatings(Movie* movies, int size) {
     int max = findMaxNumRating(movies, size);
 
