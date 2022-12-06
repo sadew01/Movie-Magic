@@ -19,10 +19,9 @@ public:
     //member functions and constructors
     Movie() {}
     Movie(string title, vector<string>& genre, vector<string>& director, int year, int length, float rating, int numRatings);
-    string getTitle();
+    // get functions
     vector<string>& getGenre();
     vector<string>& getDirector();
-    int getYear();
     int getLength();
     float getRating();
     int getNumRatings();
@@ -31,23 +30,19 @@ public:
     void print();
 
     // input validation
-    bool validInput(string line);
     bool validDirectorName(string director);
     bool validGenreInput(string line);
     bool onlyNumbers(string line);
-    bool isNumber(string line);
-    bool isName(string line);
 
     // quick sort
     int partition(Movie* arr, int low, int high);
-  // helper functions for Quick Sort
+    // helper functions for Quick Sort
     void swap(Movie* a, Movie* b);
     void quickSort(Movie* arr, int low, int high);
     void quickSortRatings(Movie* arr, int low, int high);
     void quickSortNumOfRatings(Movie* arr, int low, int high);
     int partitionRating(Movie* arr, int low, int high);
     int partitionNumOfRatings(Movie* arr, int low, int high);
-    void PrintArray(Movie* arr, int size);
 
 
     // radix sort length
