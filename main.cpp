@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include <sstream>
 #include <string>
 #include <set>
 #include <chrono>
@@ -55,17 +54,17 @@ void ReadInMovies(vector<Movie>& movies) {
 int main() {
     Movie movie;
 
-    // variables to parse input
-    string action = "Action", adventure = "Adventure", animation = "Animation", biography = "Biography", comedy = "Comedy",
-        crime = "Crime", documentary = "Documentary", drama = "Drama", family = "Family", fantasy = "Fantasy", filmNoir = "Film-Noir",
-        history = "History", horror = "Horror", music = "Music", musical = "Musical", mystery = "Mystery", romance = "Romance",
-        sciFi = "Sci-Fi", shortFilm = "Short", sport = "Sport", superhero = "Superhero", thriller = "Thriller", war = "War",
-        western = "Western";
+    // genres for parsing input
+    vector<string> allGenres = {"Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", "Documentary",
+                                "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", "Musical",
+                                "Mystery", "Romance", "Sci-Fi", "Short", "Sport", "Superhero", "Thriller",
+                                "War", "Western"};
 
     // vector to store movies after reading from the file
     vector<Movie> movies;
     ReadInMovies(movies);
 
+    // main menu options
     cout << "* Welcome to Movie Magic! *" << endl;
     cout << "Our goal is to make finding movies suited to your tastes easier." << endl;
     cout << endl;
@@ -83,131 +82,62 @@ int main() {
     cout << "Type 0 to exit." << endl;
     cout << endl;
 
-    string line, read;
-    vector<int> input;
+    // variables
     set<Movie> movieSet;
     Movie* movieArray;
     Movie* movieArray2;
     bool exit = false;
 
     while (true) {
+        string line;
+        // taking user input
         getline(cin, line);
         istringstream stream(line);
-
+        // exit if user enters 0
         if (line.at(0) == '0' && line.length() == 1) {
             exit = true;
             break;
         }
 
-        if (movie.validInput(line)) {
-            if (movie.isName(line)) {
+        // director entered
+        if (movie.validDirectorName(line)) {
+            // adding movies with desired director to movieSet
+            for (int i = 0; i < movies.size(); i++) {
+                vector<string> directors = movies.at(i).getDirector();
+                for (int j = 0; j < directors.size(); j++) {
+                    if (directors.at(j).compare(line) == 0) {
+                        movieSet.insert(movies.at(i));
+                    }
+                }
+            }
+            break;
+        }
+            // movie genre entered
+        else if (movie.validGenreInput(line)) {
+            string num;
+            // looping through each entered number
+            while (getline(stream, num, ' ')) {
+                // adding movies with desired genres to movieSet
                 for (int i = 0; i < movies.size(); i++) {
-                    vector<string> directors = movies.at(i).getDirector();
-                    for (int j = 0; j < directors.size(); j++) {
-                        if (directors.at(j).compare(line) == 0) {
+                    vector<string> genres = movies.at(i).getGenre();
+                    for (int j = 0; j < genres.size(); j++) {
+                        if (genres.at(j) == allGenres.at(stoi(num) - 1)) {
                             movieSet.insert(movies.at(i));
                         }
                     }
                 }
-                break;
-            }
-            else if (movie.isNumber(line)) {
-                while (getline(stream, read, ' ')) {
-                    input.push_back(stoi(read));
-                }
 
-                int index = 0;
-                while (index != input.size()) {
-                    for (int i = 0; i < movies.size(); i++) {
-                        int genre = input.at(index);
-                        vector<string> genres = movies.at(i).getGenre();
-
-                        for (int j = 0; j < genres.size(); j++) {
-                            if (genre == 1 && genres.at(j).compare(action) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 2 && genres.at(j).compare(adventure) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 3 && genres.at(j).compare(animation) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 4 && genres.at(j).compare(biography) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 5 && genres.at(j).compare(comedy) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 6 && genres.at(j).compare(crime) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 7 && genres.at(j).compare(documentary) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 8 && genres.at(j).compare(drama) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 9 && genres.at(j).compare(family) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 10 && genres.at(j).compare(fantasy) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 11 && genres.at(j).compare(filmNoir) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 12 && genres.at(j).compare(history) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 13 && genres.at(j).compare(horror) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 14 && genres.at(j).compare(music) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 15 && genres.at(j).compare(musical) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 16 && genres.at(j).compare(mystery) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 17 && genres.at(j).compare(romance) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 18 && genres.at(j).compare(sciFi) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 19 && genres.at(j).compare(shortFilm) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 20 && genres.at(j).compare(sport) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 21 && genres.at(j).compare(superhero) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 22 && genres.at(j).compare(thriller) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 23 && genres.at(j).compare(war) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                            else if (genre == 24 && genres.at(j).compare(western) == 0) {
-                                movieSet.insert(movies.at(i));
-                            }
-                        }
-                    }
-                    index++;
-                }
-                break;
             }
+            break;
         }
+        // invalid input
         else {
             cout << "Please enter valid input" << endl;
             cout << endl;
         }
     }
 
+    // one array for each sort
     set<Movie> ::iterator iter;
     int count = 0;
     movieArray = new Movie[movieSet.size()];
@@ -223,10 +153,12 @@ int main() {
     }
 
     while (true) {
+
         if (exit) {
             break;
         }
-        if (movieSet.size() == 0) {
+        // no movies found
+        if (movieSet.empty()) {
             cout << "No movies corresponded to your search." << endl;
             break;
         }
@@ -234,6 +166,7 @@ int main() {
         bool another = true;
 
         while (another) {
+            // second menu
             cout << endl;
             cout << "Please enter the criteria you would like to sort the movies on." << endl;
             cout << "Ex. \"1\" or \"2\"" << endl;
@@ -249,11 +182,12 @@ int main() {
 
             another = false;
             string option;
-            cin >> option;
+            getline(cin, option);
 
-
-            if (isdigit(option.at(0)) != 0 && stoi(option) >= 0 && stoi(option) <= 6) {
-                if (stoi(option) == 1) { // length from longest
+            // if digit
+            if (option.size() == 1 && isdigit(option.at(0))) {
+                // length from longest
+                if (stoi(option) == 1) {
                     cout << endl;
                     // radix sort
                     auto start = high_resolution_clock::now();
@@ -310,7 +244,8 @@ int main() {
 
 
                 }
-                else if (stoi(option) == 2) { // length from shortest
+                // length from shortest
+                else if (stoi(option) == 2) {
                     cout << endl;
                     // radix sort
                     auto start = high_resolution_clock::now();
@@ -413,7 +348,8 @@ int main() {
                     }
 
                 }
-                else if (stoi(option) == 4) { // rating from lowest
+                // rating from lowest
+                else if (stoi(option) == 4) {
                     cout << endl;
                     // radix sort
                     auto start = high_resolution_clock::now();
@@ -459,7 +395,8 @@ int main() {
 
 
                 }
-                else if (stoi(option) == 5) { // number of ratings from highest
+                // number of ratings from highest
+                else if (stoi(option) == 5) {
                     cout << endl;
                     // radix sort
                     auto start = high_resolution_clock::now();
@@ -512,7 +449,8 @@ int main() {
                     }
 
                 }
-                else if (stoi(option) == 6) { // number of ratings from lowest
+                // number of ratings from lowest
+                else if (stoi(option) == 6) {
                     cout << endl;
                     // radix sort
                     auto start = high_resolution_clock::now();
@@ -561,7 +499,14 @@ int main() {
                 else if (stoi(option) == 0) {
                     exit = true;
                 }
+                // digit is not a listed option
+                else {
+                    cout << "Please enter a valid option." << endl;
+                    another = true;
+                    continue;
+                }
             }
+            // input is not a digit
             else {
                 cout << "Please enter a valid option." << endl;
                 another = true;
@@ -577,28 +522,31 @@ int main() {
             cout << endl;
             bool anotherTime = true;
 
+            // loop for choosing different sorting options
             while (anotherTime) {
-                anotherTime = false;
-                cin >> option;
-                if (isdigit(option.at(0)) != 0 && stoi(option) >= 0 && stoi(option) <= 1) {
+                getline(cin, option);
+                // if input is a digit
+                if (!option.empty() && isdigit(option.at(0)) && option.size() == 1) {
+                    // 0 -> exit
                     if (stoi(option) == 0) {
                         exit = true;
                         another = false;
                         anotherTime = false;
                         break;
                     }
+                    // 1 -> continue looping through second menu
                     else if (stoi(option) == 1) {
                         another = true;
                         anotherTime = false;
                     }
+                    // not btwn 0 and 1
                     else {
                         cout << "Please enter a valid option." << endl;
-                        anotherTime = true;
                     }
                 }
-                else {
+                // not a digit
+                else if (!option.empty()) {
                     cout << "Please enter a valid option." << endl;
-                    anotherTime = true;
                 }
             }
         }
